@@ -39,7 +39,7 @@ To help you get started, we have a primer video on how to use Reddit's API: http
 
 - Code and executive summary must be in a clearly commented Jupyter Notebook.
 - You must submit your slide deck.
-- Materials must be submitted by **10:00 AM on Monday, April 8th**.
+- Materials must be submitted by **10:00 AM on Friday, July 12th**.
 
 ---
 
