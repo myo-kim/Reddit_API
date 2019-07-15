@@ -1,171 +1,60 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 3: Web APIs & Classification
 
-### Description
+# Project 3 Reddit API
 
-In week four we've learned about a few different classifiers. In week five we'll learn about webscraping, APIs, and Natural Language Processing (NLP). Now we're going to put those skills to the test.
+### Problem Statement
 
-For project 3, your goal is two-fold:
-1. Using Reddit's API, you'll collect posts from two subreddits of your choosing.
-2. You'll then use NLP to train a classifier on which subreddit a given post came from. This is a binary classification problem.
+Looking to learn about stock trading and different stock trading strategies? You might want to head over to reddit to see if there are existing subreddits solely dedicated to talking about stocks. Much to your advantage, there are a variety of subs dedicated to trading and different methodologies (forex, options, using robinhood specifically, weed stocks, etc). But where do you begin and how should you filter through the vast amount of information?  
 
-
-#### About the API
-
-Reddit's API is fairly straightforward. For example, if I want the posts from [`/r/boardgames`](https://www.reddit.com/r/boardgames), all I have to do is add `.json` to the end of the url: https://www.reddit.com/r/boardgames.json
-
-To help you get started, we have a primer video on how to use Reddit's API: https://www.youtube.com/watch?v=5Y3ZE26Ciuk
+Two very informative places to start are r/Stocks and r/Investing. However, you're a very busy person who doesn't have much time to be looking at **both** of these subreddits. These subreddits seem very similar, but on first glance, are you able to tell? Do you need to read both subreddits in order to be a well informed trader?
 
 ---
 
-### Requirements
+### Datasets
 
-- Gather and prepare your data using the `requests` library.
-- **Create and compare two models**. One of these must be a Bayes classifier, however the other can be a classifier of your choosing: logistic regression, KNN, SVM, etc.
-- A Jupyter Notebook with your analysis for a peer audience of data scientists.
-- An executive summary of the results you found.
-- A short presentation outlining your process and findings for a semi-technical audience.
+The datasets utilized were:
 
-**Pro Tip 1:** You can find a good example executive summary [here](https://www.proposify.biz/blog/executive-summary).
+- [r/Stocks Data](./data/stocks_data.csv)
+- [r/Investing Data](./datas/invest_data.csv)
 
-**Pro Tip 2:** Reddit will give you 25 posts **per request**. To get enough data, you'll need to hit Reddit's API **repeatedly** (most likely in a `for` loop). _Be sure to use the `time.sleep()` function at the end of your loop to allow for a break in between requests. **THIS IS CRUCIAL**_
+### Data Description
 
-**Pro tip 3:** The API will cap you at 1,000 posts for each subreddit (assuming the subreddit has that many posts).
-
-**Pro tip 4:** At the end of each loop, be sure to save the results from your scrape as a `csv`: JSON from Reddit > Pandas DataFrame > CSV. That way, if something goes wrong in your loop, you won't lose all your data.
+Each column represents an individual unique word found in the title of each post. If the word was found in the title it is marked with a 1 and 0 if not.
 
 ---
 
-### Necessary Deliverables / Submission
+### Executive Summary
 
-- Code and executive summary must be in a clearly commented Jupyter Notebook.
-- You must submit your slide deck.
-- Materials must be submitted by **10:00 AM on Friday, July 12th**.
+The two subreddits are very similar, from their names to their descriptions. r/Stocks is described as a place to talk all things stocks, be it buy/sell suggestions, tips, economic news, etc. r/Investing is not much different except it includes jargon about technical analysis. The model works to separate the two subreddits by their title only. 
 
----
+The posts collected are almost evenly split, with r/Stocks making up 44% of the entire dataset and r/Investing making up 56%. There is a total of 1,687 posts collected. I ran through a variety of models in order to see how each model compared to the baseline. However, the accuracy score for the models were quite similar and did not do much better than the baseline accuracy. 
 
-## Rubric
-Your local instructor will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
-
-For Project 3 the evaluation categories are as follows:<br>
-**The Data Science Process**
-- Problem Statement
-- Data Collection
-- Data Cleaning & EDA
-- Preprocessing & Modeling
-- Evaluation and Conceptual Understanding
-- Conclusion and Recommendations
-
-**Organization and Professionalism**
-- Organization
-- Visualizations
-- Python Syntax and Control Flow
-- Presentation
-
-**Scores will be out of 30 points based on the 10 categories in the rubric.** <br>
-*3 points per section*<br>
-
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
-
-
-### The Data Science Process
-
-**Problem Statement**
-- Is it clear what the goal of the project is?
-- What type of model will be developed?
-- How will success be evaluated?
-- Is the scope of the project appropriate?
-- Is it clear who cares about this or why this is important to investigate?
-- Does the student consider the audience and the primary and secondary stakeholders?
-
-**Data Collection**
-- Was enough data gathered to generate a significant result?
-- Was data collected that was useful and relevant to the project?
-- Was data collection and storage optimized through custom functions, pipelines, and/or automation?
-- Was thought given to the server receiving the requests such as considering number of requests per second?
-
-**Data Cleaning and EDA**
-- Are missing values imputed/handled appropriately?
-- Are distributions examined and described?
-- Are outliers identified and addressed?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-- Does the student address whether or not they are likely to be able to answer their problem statement with the provided data given what they've discovered during EDA?
-
-**Preprocessing and Modeling**
-- Is text data successfully converted to a matrix representation?
-- Are methods such as stop words, stemming, and lemmatization explored?
-- Does the student properly split and/or sample the data for validation/training purposes?
-- Does the student test and evaluate a variety of models to identify a production algorithm (**AT MINIMUM:** Bayes and one other model)?
-- Does the student defend their choice of production model relevant to the data at hand and the problem?
-- Does the student explain how the model works and evaluate its performance successes/downfalls?
-
-**Evaluation and Conceptual Understanding**
-- Does the student accurately identify and explain the baseline score?
-- Does the student select and use metrics relevant to the problem objective?
-- Does the student interpret the results of their model for purposes of inference?
-- Is domain knowledge demonstrated when interpreting results?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
-
-**Conclusion and Recommendations**
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-- Does the conclusion answer the original problem statement?
-- Does the student address how findings of this research can be applied for the benefit of stakeholders?
-- Are future steps to move the project forward identified?
-
-
-### Organization and Professionalism
-
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
-
-**Visualizations**
-- Are sufficient visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Are plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
-
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Are `sklearn` and `NLTK` methods used appropriately?
-
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
-
+Although it could be a problem with the models themselves, I believe that these two subreddits content wise are not very different.
 
 ---
 
-### Why we choose this project for you?
-This project covers three of the biggest concepts we cover in the class: Classification Modeling, Natural Language Processing and Data Wrangling/Acquisition.
+### Methodology
 
-Part 1 of the project focuses on **Data wrangling/gathering/acquisition**. This is a very important skill as not all the data you will need will be in clean CSVs or a single table in SQL.  There is a good chance that wherever you land you will have to gather some data from some unstructured/semi-structured sources; when possible, requesting information from an API, but often scraping it because they don't have an API (or it's terribly documented).
+The first step was to collect the data from the subreddits. In order for the model to train with a balanced data set, I aimed to collect close to 1,000 posts from each subreddit. r/Stocks had a collection of 743 posts while r/StockMarket had a collection of 944. The combined dataset did not have a clean split between the two but was close enough for the model to work off of. 
 
-Part 2 of the project focuses on **Natural Language Processing** and converting standard text data (like Titles and Comments) into a format that allows us to analyze it and use it in modeling.
+To clean the data, repeated posts were removed based on their post names. Daily Discussion or Daily Question threads were removed as well. In order to work with a smaller number of features, the model only evaluated post titles. Even then, the total word count was 3,209 (using ngram (1,1)). The texts were split into features using either Count Vectorizer or TF-IDF Vectorizer. The models utilized were Logistic Regression, Multinomial Bayes, Decision Trees and Bagging. GridSearch was used to find the best parameters for the vectorizers and models. 
 
-Part 3 of the project focuses on **Classification Modeling**.  Given that project 2 was a regression focused problem, we needed to give you a classification focused problem to practice the various models, means of assessment and preprocessing associated with classification.   
+The model that was the most accurate was the Multinomial Bayes using TF-IDF vectorizer. The baseline accuracy was 55% and the model scored 64%. 
+
+**Visualizations**  
+The graph for the scatter plot using text was created using a library called Scatter Text created by Jason Kessler. The graph works to plot the frequency of words for both subreddits, each subreddit having an axis.  
+
+The graph for the co-occurence of words was created using Gephi.
+
+---
+
+### Conclusion and Next Steps 
+
+As the accuracy score did not vary greatly from the varying models, it can be inferred that the posts between the two subreddits are too similar to accurately split into different categories. Therefore, it is recommended for new investors to focus on one subreddit rather than read both. 
+
+However, as the model only focuses on the title of the posts and not text, the investor should look into what content they are specifically looking for. It seems as though the topics (based on titles) covered in the two subreddits are very similar. This does not directly correlate to the commentary or content of the posts. Therefore, while the topics talked about might be similar, there could be different commentary based on the subreddit. 
+
+While the time sensitive investor might choose to focus on only one subreddit, to get a broader breadth of information it would be beneficial to stil read both subreddits. 
+
+---
+
+
